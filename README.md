@@ -8,7 +8,7 @@ Template-based discriminative trackers are currently the dominant tracking parad
 
 #### Clone the GIT repository.  
 ```bash
-git clone  .
+git clone https://github.com/nnhatdu/Discriminative-Oneshot-Segmentation-tracker.git.
 ```
 
 #### Install dependencies
