@@ -101,8 +101,8 @@ def run(settings):
                            shuffle=False, drop_last=True, epoch_interval=10, stack_dim=1)
 
     # Create network
-    # resnet50 or resnet18
-    net = segm_models.segm_resnet50(backbone_pretrained=True, topk_pos=settings.segm_topk_pos,
+    # resnet101 or resnet50 or resnet18
+    net = segm_models.segm_resnet101(backbone_pretrained=True, topk_pos=settings.segm_topk_pos,
                                     topk_neg=settings.segm_topk_neg, mixer_channels=mixer_channels)
 
     # Set objective

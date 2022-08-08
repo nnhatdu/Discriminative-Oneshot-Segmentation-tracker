@@ -20,7 +20,6 @@ class ResNet(nn.Module):
         self.layer2 = self._make_layer(block, inplanes*2, layers[1], stride=2)
         self.layer3 = self._make_layer(block, inplanes*4, layers[2], stride=2)
         self.layer4 = self._make_layer(block, inplanes*8, layers[3], stride=2)
-        # self.avgpool = nn.AvgPool2d(7, stride=1)
         self.avgpool = nn.AdaptiveAvgPool2d((1,1))
         self.fc = nn.Linear(inplanes*8 * block.expansion, num_classes)
 
@@ -135,4 +134,21 @@ def resnet50(output_layers=None, pretrained=False):
     model = ResNet(Bottleneck, [3, 4, 6, 3], output_layers)
     if pretrained:
         model.load_state_dict(model_zoo.load_url(model_urls['resnet50']))
+    return model
+
+
+def resnet101(output_layers=None, pretrained=False):
+    """Constructs a ResNet-101 model.
+    """
+
+    if output_layers is None:
+        output_layers = ['default']
+    else:
+        for l in output_layers:
+            if l not in ['conv1', 'layer1', 'layer2', 'layer3', 'layer4', 'fc']:
+                raise ValueError('Unknown layer: {}'.format(l))
+
+    model = ResNet(Bottleneck, [3, 4, 23, 3], output_layers)
+    if pretrained:
+        model.load_state_dict(model_zoo.load_url(model_urls['resnet101']))
     return model
